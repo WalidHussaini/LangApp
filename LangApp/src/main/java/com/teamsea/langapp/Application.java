@@ -37,40 +37,41 @@ public class Application {
         frame.setContentPane(loginGrid);
         frame.setResizable(false);
         frame.setVisible(true);
-        ConnectDb.getConnection();
+        //ConnectDb.getConnection();
+        CreateDb connect = new CreateDb();
         CreateTable.createUserTable();
     }
 }
 
-//class ConnectDb {
-//    private String urlSQLite;
-//    private Driver driverSQLite;
-//    private Connection con;
-//    
-//    public ConnectDb() {
-//        urlSQLite = "jdbc:sqlite:company.db";
-//        try {
-//            driverSQLite = new org.sqlite.JDBC();
-//            DriverManager.registerDriver(driverSQLite);
-//            System.out.println("Driver for SQLite downloaded.");
-//        } catch (Exception e) {
-//            System.out.println("Problem with download driver for SQLite: " +
-//            e.getMessage());
-//        }
-//        try {
-//            con = DriverManager.getConnection(urlSQLite);
-//            System.out.println("Connection to SQLite is done.");
-//        } catch (Exception e) {
-//            System.out.println("Problem with connection to SQLite: " +
-//            e.getMessage());
-//        }
-//        try {
-//            if (!con.isClosed()) {
-//            con.close();
-//            System.out.println("Connection to SQLite closed.");
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Problem with close connection of SQLite");
-//        }
-//    }
-//}
+class CreateDb {
+    private String urlSQLite;
+    private Driver driverSQLite;
+    private Connection con;
+    
+    public CreateDb() {
+        urlSQLite = "jdbc:sqlite:langapp.db";
+        try {
+            driverSQLite = new org.sqlite.JDBC();
+            DriverManager.registerDriver(driverSQLite);
+            System.out.println("Driver for SQLite downloaded.");
+        } catch (Exception e) {
+            System.out.println("Problem with download driver for SQLite: " +
+            e.getMessage());
+        }
+        try {
+            con = DriverManager.getConnection(urlSQLite);
+            System.out.println("Connection to SQLite is done.");
+        } catch (Exception e) {
+            System.out.println("Problem with connection to SQLite: " +
+            e.getMessage());
+        }
+        try {
+            if (!con.isClosed()) {
+            con.close();
+            System.out.println("Connection to SQLite closed.");
+            }
+        } catch (Exception e) {
+            System.out.println("Problem with close connection of SQLite");
+        }
+    }
+}

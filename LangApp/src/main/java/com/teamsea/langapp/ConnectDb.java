@@ -24,6 +24,7 @@ public class ConnectDb {
             return con;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+            System.out.println("here");
             return null;
         }
     }
