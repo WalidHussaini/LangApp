@@ -16,7 +16,7 @@ public class UseTable {
     public static void insertUser(int id, String username, String email, String password) {
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
-        String sqlString = ("INSERT INTO User (id, username, email, password) VALUES ("+ id +", '"+ username +"', '"+ email +"', '"+ password +"')");
+        String sqlString = ("INSERT INTO User (username, email, password) VALUES ('"+ username +"', '"+ email +"', '"+ password +"')");
         try {
             con.setAutoCommit(false);
             stmt = con.createStatement();
@@ -79,18 +79,13 @@ public class UseTable {
         }
     }
     
-    public static void get(String tablename, int id) {
+    public static ResultSet get(String tablename, int id) {
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
         try {
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select from "+ tablename +" WHERE id="+id);
-            int n = 0;
-            while (rs.next()) {
-                int numColumns = rs.getMetaData().getColumnCount();
-                System.out.print(" " + rs.getObject(0));
-            }
-            rs.close();
+            ResultSet rs = stmt.executeQuery("Select * from "+ tablename +" WHERE id = "+id);
+            return rs;
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         } finally {
@@ -109,6 +104,7 @@ public class UseTable {
                 }
             }
         }
+        return null;
     }
 //    public static void main(String[] args) {
 //        insertEmp();

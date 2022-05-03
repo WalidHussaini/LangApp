@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;/*
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -46,7 +48,12 @@ public class Application {
         loginButton.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 UseTable.showAll("Language", "name");
-                UseTable.get("Language", 1);
+                ResultSet res = UseTable.get("Language", 1);
+                try {
+                    res.getObject(2);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 String[] arguments = new String[] {"123"};
                 Login_Form.main(arguments);
             } 
