@@ -13,7 +13,7 @@ import java.sql.Statement;
  * @author gerg2
  */
 public class UseTable {
-    public static void insertUser(int id, String username, String email, String password) {
+    public static void insertUser(String username, String email, String password) {
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
         String sqlString = ("INSERT INTO User (username, email, password) VALUES ('"+ username +"', '"+ email +"', '"+ password +"')");
