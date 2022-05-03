@@ -43,12 +43,12 @@ public class UseTable {
         }
     }
 
-    public static void showAll() {
+    public static void showAll(String tablename, String key) {
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
         try {
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from employee ");
+            ResultSet rs = stmt.executeQuery("Select "+ key +" from "+ tablename);
             int n = 0;
             while (rs.next()) {
                 int numColumns = rs.getMetaData().getColumnCount();
@@ -57,6 +57,38 @@ public class UseTable {
                     System.out.print(" " + rs.getObject(i));
                 }
                 System.out.println("");
+            }
+            rs.close();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
+    }
+    
+    public static void get(String tablename, int id) {
+        Connection con = ConnectDb.getConnection();
+        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("Select from "+ tablename +" WHERE id="+id);
+            int n = 0;
+            while (rs.next()) {
+                int numColumns = rs.getMetaData().getColumnCount();
+                System.out.print(" " + rs.getObject(0));
             }
             rs.close();
         } catch (SQLException ex) {

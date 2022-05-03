@@ -45,6 +45,8 @@ public class Application {
         
         loginButton.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
+                UseTable.showAll("Language", "name");
+                UseTable.get("Language", 1);
                 String[] arguments = new String[] {"123"};
                 Login_Form.main(arguments);
             } 
