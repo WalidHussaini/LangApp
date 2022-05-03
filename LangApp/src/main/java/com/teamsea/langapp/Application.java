@@ -1,6 +1,8 @@
 package com.teamsea.langapp;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.Driver;
@@ -40,6 +42,13 @@ public class Application {
         //ConnectDb.getConnection();
         CreateDb connect = new CreateDb();
         CreateTable.createUserTable();
+        
+        loginButton.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) {
+                String[] arguments = new String[] {"123"};
+                Login_Form.main(arguments);
+            } 
+        } );
     }
 }
 
