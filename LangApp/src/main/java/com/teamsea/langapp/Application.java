@@ -1,4 +1,5 @@
 package com.teamsea.langapp;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -36,6 +37,8 @@ public class Application {
         registerButton.setPreferredSize(new Dimension(40, 100));
         loginGrid.add(registerButton); // Adds Button to content pane of frame
         JButton loginButton = new JButton("Login");
+        loginButton.setBackground(Color.decode("#f8c200"));
+        loginButton.setOpaque(true);
         loginButton.setPreferredSize(new Dimension(40, 100));
         loginGrid.add(loginButton); // Adds Button to content pane of frame
         frame.setContentPane(loginGrid);
@@ -43,17 +46,21 @@ public class Application {
         frame.setVisible(true);
         //ConnectDb.getConnection();
         CreateDb connect = new CreateDb();
-        CreateTable.createUserTable();
+        //CreateTable.createUserTable();
+        
+        registerButton.addActionListener(new ActionListener() { 
+            public void actionPerformed(ActionEvent e) {
+                String[] arguments = new String[] {"123"};
+                Register_Form.main(arguments);
+            } 
+        } );
         
         loginButton.addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
-                UseTable.showAll("Language", "name");
-                ResultSet res = UseTable.get("Language", 1);
-                try {
-                    res.getObject(2);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                //UseTable.showAll("Language", "name");
+                String res = UseTable.get("Language", 2, 2);
+                System.out.println(res);
+                //UseTable.insertUser("name", "email", "password");
                 String[] arguments = new String[] {"123"};
                 Login_Form.main(arguments);
             } 
