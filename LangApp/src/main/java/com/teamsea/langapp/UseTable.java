@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -43,10 +44,12 @@ public class UseTable {
         }
     }
 
-    public static void showAll(String tablename, String key) {
+    public static ArrayList<String> getAll(String tablename, String key) {
+        System.out.println("here");
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
         try {
+            ArrayList<String> results = new ArrayList<>();
             stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("Select "+ key +" from "+ tablename);
             int n = 0;
@@ -54,11 +57,12 @@ public class UseTable {
                 int numColumns = rs.getMetaData().getColumnCount();
                 n++;
                 for (int i = 1; i <= numColumns; i++) {
-                    System.out.print(" " + rs.getObject(i));
+                    System.out.println(String.valueOf(rs.getObject(i)));
+                    results.add(String.valueOf(rs.getObject(i)));
                 }
-                System.out.println("");
             }
             rs.close();
+            return results;
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         } finally {
@@ -77,15 +81,18 @@ public class UseTable {
                 }
             }
         }
+        return new ArrayList<String>();
     }
     
-    public static ResultSet get(String tablename, int id) {
+    public static String get(String tablename, String key, String value, int column) {
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
         try {
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select * from "+ tablename +" WHERE id = "+id);
-            return rs;
+            System.out.println("Select * from "+ tablename +" WHERE "+ key +" = '"+ value +"'");
+            ResultSet rs = stmt.executeQuery("Select * from "+ tablename +" WHERE "+ key +" = '"+ value +"'");
+            String resstr = String.valueOf(rs.getObject(column));
+            return resstr;
         } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         } finally {

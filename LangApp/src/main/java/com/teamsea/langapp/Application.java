@@ -1,5 +1,6 @@
 package com.teamsea.langapp;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -24,47 +25,18 @@ import javax.swing.JFrame;
  *
  * @author gerg2012
  */
-public class Application {
+public class Application{
     /**
     * @param args the command line arguments
     */
+    public static Integer sessionUser;
+    
     public static void main(String[] args) {
-        JFrame frame = new JFrame("LangApp");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(414, 896);
-        JPanel loginGrid = new JPanel(new GridLayout(4,4,4,4));
-        JButton registerButton = new JButton("Register");
-        registerButton.setPreferredSize(new Dimension(40, 100));
-        loginGrid.add(registerButton); // Adds Button to content pane of frame
-        JButton loginButton = new JButton("Login");
-        loginButton.setBackground(Color.decode("#f8c200"));
-        loginButton.setOpaque(true);
-        loginButton.setPreferredSize(new Dimension(40, 100));
-        loginGrid.add(loginButton); // Adds Button to content pane of frame
-        frame.setContentPane(loginGrid);
-        frame.setResizable(false);
-        frame.setVisible(true);
         //ConnectDb.getConnection();
         CreateDb connect = new CreateDb();
         //CreateTable.createUserTable();
-        
-        registerButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent e) {
-                String[] arguments = new String[] {"123"};
-                Register_Form.main(arguments);
-            } 
-        } );
-        
-        loginButton.addActionListener(new ActionListener() { 
-            public void actionPerformed(ActionEvent e) {
-                //UseTable.showAll("Language", "name");
-                String res = UseTable.get("Language", 2, 2);
-                System.out.println(res);
-                //UseTable.insertUser("name", "email", "password");
-                String[] arguments = new String[] {"123"};
-                Login_Form.main(arguments);
-            } 
-        } );
+        String[] arguments = new String[] {"123"};
+        Login_Form.main(arguments);
     }
 }
 
