@@ -4,6 +4,13 @@
  */
 package com.teamsea.langapp;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -19,9 +26,28 @@ public class LanguageMenu extends javax.swing.JFrame {
     public LanguageMenu(int langId) {
         initComponents();
         titleLabel.setText(UseTable.get("Language", "id", Integer.toString(langId + 1), 2));
-        var tabs = UseTable.getAll("Level", "name");
+        var tabs = UseTable.getAll("Level", "name", "", "");
         for (int i = 0; i < tabs.size(); i++){
-            jTabbedPane1.addTab(String.valueOf(tabs.get(i)), new JPanel());
+            JPanel tabPanel = new JPanel();
+            jTabbedPane1.addTab(String.valueOf(tabs.get(i)), tabPanel);
+            var items = UseTable.getAll("Conversation", "contextId", "levelId", String.valueOf(i + 1));
+            List<JPanel> panelList = new ArrayList<JPanel>();
+            for (int i2 = 0; i2 < items.size(); i2++){
+                JPanel contextPanel = new JPanel();
+                JLabel contextTitle = new JLabel();
+                JButton subcontextButton = new JButton();
+                contextTitle.setText(UseTable.get("Context", "id", String.valueOf(items.get(i2)), 2));
+                String subcontextId = UseTable.get("Conversation", "contextId", String.valueOf(items.get(i2)), 5);
+                subcontextButton.setText(UseTable.get("Subcontext", "id", subcontextId, 2));
+                contextPanel.add(contextTitle);
+                contextPanel.add(subcontextButton);
+                panelList.add(contextPanel);
+                contextPanel.setSize(new Dimension(414, 40));
+                contextPanel.setBackground(Color.decode("#f8c200"));
+                contextPanel.setOpaque(true);
+                final int i3 = i2;
+                tabPanel.add(contextPanel);
+            }
         }
     }
 
@@ -58,8 +84,8 @@ public class LanguageMenu extends javax.swing.JFrame {
         getContentPane().add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 400, -1));
 
         jTabbedPane1.setMaximumSize(new java.awt.Dimension(414, 32767));
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(414, 200));
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(414, 200));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(414, 400));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(414, 800));
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedPane1StateChanged(evt);

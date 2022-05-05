@@ -29,7 +29,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         jPanel1.setLayout(new BoxLayout(jPanel1,BoxLayout.Y_AXIS));
-        var items = UseTable.getAll("Language", "name");
+        var items = UseTable.getAll("Language", "name", "", "");
         List<JButton> buttonList = new ArrayList<JButton>();
         for (int i = 0; i < items.size(); i++){
             System.out.println(String.valueOf(items.get(i)));

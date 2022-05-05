@@ -44,14 +44,19 @@ public class UseTable {
         }
     }
 
-    public static ArrayList<String> getAll(String tablename, String key) {
+    public static ArrayList<String> getAll(String tablename, String key,  String filterKey, String value) {
         System.out.println("here");
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
         try {
             ArrayList<String> results = new ArrayList<>();
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("Select "+ key +" from "+ tablename);
+            ResultSet rs;
+            if(filterKey.equals("") || value.equals("")){
+                rs = stmt.executeQuery("Select "+ key +" from "+ tablename);
+            } else {
+                rs = stmt.executeQuery("Select "+ key +" from "+ tablename +" WHERE "+ filterKey +" = '"+ value +"'");
+            }
             int n = 0;
             while (rs.next()) {
                 int numColumns = rs.getMetaData().getColumnCount();

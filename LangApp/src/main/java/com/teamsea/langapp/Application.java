@@ -33,19 +33,19 @@ public class Application{
     
     public static void main(String[] args) {
         //ConnectDb.getConnection();
-        CreateDb connect = new CreateDb();
+        Connect connect = new Connect();
         //CreateTable.createUserTable();
         String[] arguments = new String[] {"123"};
         Login_Form.main(arguments);
     }
 }
 
-class CreateDb {
+class Connect {
     private String urlSQLite;
     private Driver driverSQLite;
     private Connection con;
     
-    public CreateDb() {
+    public Connect() {
         urlSQLite = "jdbc:sqlite:langapp.db";
         try {
             driverSQLite = new org.sqlite.JDBC();

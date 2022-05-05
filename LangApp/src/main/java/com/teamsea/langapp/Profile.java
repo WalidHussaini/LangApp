@@ -17,6 +17,7 @@ public class Profile extends javax.swing.JFrame {
         initComponents();
         helloLabel.setText("Hello, "+UseTable.get("User", "id", Integer.toString(Application.sessionUser), 2)+"!");
         emailLabel.setText("Your email is "+UseTable.get("User", "id", Integer.toString(Application.sessionUser), 3));
+        jPanel1.setVisible(false);
     }
 
     /**
@@ -31,6 +32,15 @@ public class Profile extends javax.swing.JFrame {
         goBack = new javax.swing.JLabel();
         helloLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
+        passwordChangeButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        currentPasswordField = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
+        newPasswordField = new javax.swing.JPasswordField();
+        jLabel3 = new javax.swing.JLabel();
+        confirmPasswordField = new javax.swing.JPasswordField();
+        submit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(414, 896));
@@ -55,6 +65,50 @@ public class Profile extends javax.swing.JFrame {
         emailLabel.setText("Your email is #");
         getContentPane().add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
+        passwordChangeButton.setText("Change password");
+        passwordChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordChangeButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(passwordChangeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Current password");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        currentPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                currentPasswordFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(currentPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 140, -1));
+
+        jLabel2.setText("New password");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        newPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPasswordFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(newPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 140, -1));
+
+        jLabel3.setText("Confirm new password");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        jPanel1.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 140, -1));
+
+        submit.setText("Set");
+        submit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitActionPerformed(evt);
+            }
+        });
+        jPanel1.add(submit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 390, 220));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -62,6 +116,22 @@ public class Profile extends javax.swing.JFrame {
         new MainMenu().setVisible(true);
         Profile.this.setVisible(false);
     }//GEN-LAST:event_goBackMouseClicked
+
+    private void passwordChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordChangeButtonActionPerformed
+        jPanel1.setVisible(true);
+    }//GEN-LAST:event_passwordChangeButtonActionPerformed
+
+    private void submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_submitActionPerformed
+
+    private void currentPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currentPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_currentPasswordFieldActionPerformed
+
+    private void newPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPasswordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newPasswordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,8 +169,17 @@ public class Profile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField confirmPasswordField;
+    private javax.swing.JPasswordField currentPasswordField;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel goBack;
     private javax.swing.JLabel helloLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField newPasswordField;
+    private javax.swing.JButton passwordChangeButton;
+    private javax.swing.JButton submit;
     // End of variables declaration//GEN-END:variables
 }
