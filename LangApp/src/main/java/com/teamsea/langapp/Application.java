@@ -45,6 +45,10 @@ class Connect {
     private Driver driverSQLite;
     private Connection con;
     
+    /**
+    * Tests the connection and downloads the requited drivers.
+    * @author gerg2
+    */
     public Connect() {
         urlSQLite = "jdbc:sqlite:langapp.db";
         try {

@@ -10,10 +10,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- *
- * @author gerg2
- */
+* Contains methods that form SQL queries.
+* @author gerg2
+*
+* @param  url  an absolute URL giving the base location of the image
+* @param  name the location of the image, relative to the url argument
+* @return      the image at the specified URL
+* @see         Image
+*/
 public class UseTable {
+    /**
+    * Inserts a new user to the database.
+    * @author gerg2
+    * @param  username  username of the new user
+    * @param  email username of the new user
+    * @param  password password of the new user
+    */
     public static void insertUser(String username, String email, String password) {
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;
@@ -44,6 +56,15 @@ public class UseTable {
         }
     }
 
+    /**
+    * Returns an array of all rows/elements requested by the query.
+    * @author gerg2
+    * @param  tablename  name of the database table
+    * @param  key name of the database row
+    * @param  filterKey name of the database row used to filter, String, can be empty("")
+    * @param  value value of the row used to filter, String, can be empty("")
+    * @return an array with Strings of all values
+    */
     public static ArrayList<String> getAll(String tablename, String key,  String filterKey, String value) {
         System.out.println("here");
         Connection con = ConnectDb.getConnection();
@@ -88,7 +109,15 @@ public class UseTable {
         }
         return new ArrayList<String>();
     }
-    
+    /**
+    * Returns a String of the value of the requested database cell by a query.
+    * @author gerg2
+    * @param  tablename  name of the database table
+    * @param  key name of the row used to filter, String, can be empty("")
+    * @param  value value of the row used to filter, String, can be empty("")
+    * @param  column index of the column
+    * @return a String of the value of the row and column
+    */
     public static String get(String tablename, String key, String value, int column) {
         Connection con = ConnectDb.getConnection();
         Statement stmt = null;

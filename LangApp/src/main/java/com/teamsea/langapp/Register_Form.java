@@ -245,7 +245,8 @@ public class Register_Form extends javax.swing.JFrame {
         } else if (!password.equals(password2)){
             errorLabel.setText("Passwords do not match!");
         } else {
-            UseTable.insertUser(username, email, password);
+            String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password); 
+            UseTable.insertUser(username, email, sha256hex);
             errorLabel.setText("Registered, go back to login");
         }
     }//GEN-LAST:event_jButton_RegisterActionPerformed

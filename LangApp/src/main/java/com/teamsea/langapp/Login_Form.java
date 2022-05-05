@@ -43,6 +43,7 @@ public class Login_Form extends javax.swing.JFrame {
         jButton_Login = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPasswordField_Password = new javax.swing.JPasswordField();
+        errorLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +115,11 @@ public class Login_Form extends javax.swing.JFrame {
         });
         jPanel3.add(jPasswordField_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 264, 49));
 
+        errorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorLabel.setMaximumSize(new java.awt.Dimension(0, 11));
+        errorLabel.setPreferredSize(new java.awt.Dimension(0, 11));
+        jPanel3.add(errorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 394, -1));
+
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 1, 48)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("LangApp");
@@ -177,14 +183,15 @@ public class Login_Form extends javax.swing.JFrame {
     private void jButton_LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_LoginActionPerformed
         String username =  jTextField_Username.getText();
         String password =  String.valueOf(jPasswordField_Password.getPassword());
+        String sha256hex = org.apache.commons.codec.digest.DigestUtils.sha256Hex(password);
         String registeredPassword = UseTable.get("User", "username", username, 4);
-        if(password.equals(registeredPassword)){
+        if(sha256hex.equals(registeredPassword)){
             System.out.println("Login "+ UseTable.get("User", "username", username, 1));
             Application.sessionUser = Integer.parseInt(UseTable.get("User", "username", username, 1));
             new MainMenu().setVisible(true);
             Login_Form.this.setVisible(false);
         } else {
-            System.out.println("Wrong credentials " + registeredPassword);
+            errorLabel.setText("Wrong credentials!");
         }
     }//GEN-LAST:event_jButton_LoginActionPerformed
 
@@ -232,6 +239,7 @@ public class Login_Form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JButton jButton_Login;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
